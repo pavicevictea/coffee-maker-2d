@@ -37,6 +37,7 @@ float getTextWidth(std::string text, float scale) {
     return width;
 }
 
+// Initialize FreeType and load font for text rendering
 void setupTextRendering(GLFWwindow* window) {
     if (FT_Init_FreeType(&GState.ft)) {
         endProgram(std::string("ERROR::FREETYPE: Could not init FreeType Library"));
@@ -95,6 +96,7 @@ void setupTextRendering(GLFWwindow* window) {
     glBindVertexArray(0);
 }
 
+// Render text at given position and scale
 void RenderText(unsigned int shader, std::string text, float x, float y, float scale, const float color[3]) {
     glUseProgram(shader);
     glUniform3f(glGetUniformLocation(shader, "textColor"), color[0], color[1], color[2]);
@@ -150,6 +152,7 @@ float quadVertices[] = {
      0.5f,  0.5f, 1.0f, 1.0f,
 };
 
+// Setup VAOs/VBOs
 void setupVAOs() {
     glGenVertexArrays(1, &GState.VAO_Quad);
     glGenBuffers(1, &GState.VBO_Quad);
@@ -172,6 +175,7 @@ void setupVAOs() {
     glBindVertexArray(0);
 }
 
+// Load textures for machine, cup, lid, background and cursor images
 void loadTexturesAndCursors(GLFWwindow* window) {
     GState.backgroundTexture = loadImageToTexture("Resources/background.jpg");
     GState.machineBodyTexture = loadImageToTexture("Resources/coffee-machine.png");
@@ -217,6 +221,7 @@ void loadTexturesAndCursors(GLFWwindow* window) {
     glfwSetCursor(window, GState.cursorNormal);
 }
 
+// Initialize all drawing resources
 void initDrawingResources(GLFWwindow* window) {
     initShaders();
     setupVAOs();
@@ -357,6 +362,7 @@ void drawStudentInfo() {
     RenderText(GState.textShader, indexText, indexPixelX, indexPixelY, indexScale, blackColor);
 }
 
+// Draw drink selection buttons in MENU/SELECTING_DRINK states
 void drawDrinkButtons() {
     GLFWwindow* window = glfwGetCurrentContext();
     int width, height;
@@ -405,6 +411,7 @@ void drawDrinkButtons() {
     }
 }
 
+// Draw progress bar for pouring state
 void drawProgressBar() {
     float barX = POURING_X_TARGET;
     float barY = PROGRESS_BAR_Y;
@@ -507,6 +514,7 @@ void drawTargetCircle() {
     drawColoredEllipse(GState.liquidShader, circleColor, targetX + 0.01f, targetY + 0.1f, targetRadiusX, targetRadiusY);
 }
 
+// Draw liquid pouring stream from machine to cup
 void drawPouringStream() {
     if (GState.liquidLevel > 0.0f && GState.liquidLevel < 1.0f) {
         float streamX = POURING_X_TARGET + 0.01f;
@@ -530,6 +538,7 @@ void drawPouringStream() {
     }
 }
 
+// Main rendering function, draw every part of the scene (background, machine, cup, liquid, UI, text)
 void drawScene(double currentTime) {
     glDisable(GL_BLEND);
 

@@ -4,12 +4,14 @@
 #include <cmath>
 #include <algorithm>
 
+// Handles keyboard input
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
 }
 
+// Handles mouse movement
 void cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
@@ -27,6 +29,7 @@ void cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
     }
 }
 
+// Handles mouse button presses and releases
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
@@ -44,9 +47,11 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     float lidSizeX = LID_SCALE_X;
     float lidSizeY = LID_SCALE_Y;
 
+    // Mouse press handling
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-        glfwSetCursor(window, GState.cursorPressed);
+        glfwSetCursor(window, GState.cursorPressed); // change cursor look
 
+		// Menu drink selection handling
         if (GState.state == GameState::MENU) {
             float col1X = 0.1f;
             float col2X = 0.3f;
@@ -83,6 +88,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
                 }
             }
         }
+		// Drag cup if in positioning state
         else if (GState.state == GameState::POSITIONING_CUP) {
 
             if (mouseNDC[0] < GState.cupPos[0] + cupSizeX / 2.0f &&
@@ -93,6 +99,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
                 GState.isDraggingCup = true;
             }
         }
+		// Drag lid if in done state and lid is not on cup
         else if (GState.state == GameState::DONE) {
             if (!GState.lidOnCup) {
                 if (mouseNDC[0] < GState.lidPos[0] + lidSizeX / 2.0f &&
@@ -103,6 +110,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
                     GState.isDraggingLid = true;
                 }
             }
+			// Reset cup and lid positions 
             else {
                 if (mouseNDC[0] < GState.cupPos[0] + cupSizeX / 2.0f &&
                     mouseNDC[0] > GState.cupPos[0] - cupSizeX / 2.0f &&
@@ -124,8 +132,11 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
             }
         }
     }
+	// Mouse release handling
     else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
-        glfwSetCursor(window, GState.cursorNormal);
+		glfwSetCursor(window, GState.cursorNormal); // change cursor look back
+        
+        // Drop cup and snap to target if close enough
         if (GState.isDraggingCup && GState.state == GameState::POSITIONING_CUP) {
             GState.isDraggingCup = false;
 
@@ -146,6 +157,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
                 GState.cupCentered = false;
             }
         }
+		// Drop lid and snap to cup if close enough
         else if (GState.isDraggingLid && GState.state == GameState::DONE) {
             GState.isDraggingLid = false;
 

@@ -3,6 +3,7 @@
 
 GlobalState GState;
 
+// Sets RGBA color array based on the drink type
 void getDrinkColor(DrinkType drink, float color[4]) {
     switch (drink) {
     case DrinkType::ESPRESSO:
