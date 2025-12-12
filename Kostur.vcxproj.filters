@@ -21,6 +21,18 @@
     <ClCompile Include="Source\Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Shaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\stb_image.h">
@@ -29,8 +41,72 @@
     <ClInclude Include="Header\Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\Shaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Shaders\MachineBody.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shaders\MachineBody.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shaders\Liquid.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shaders\Liquid.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shaders\Cup.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shaders\Cup.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shaders\Text.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Shaders\Text.frag">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\background.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\lid.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\empty-cup.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\coffee-machine.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\cup.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\coffee-bean-cursor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\spoon-cursor.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\ariali.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>
